@@ -1,36 +1,63 @@
 locals {
-  firstNames = ["Josu", "Javier", "Nacho", "Beatriz", "Paula", "Alvaro"]
-  lastNames  = ["Uribe", "Fernandez", "Fanjul", "Santa-Eugenia", "Docampo", "Dominguez"]
-  fullNames  = zipmap(local.firstNames, local.lastNames)
+  firstNames  = ["Josu", "Javier", "Nacho", "Beatriz", "Paula", "Alvaro"]
+  lastNames   = ["Uribe", "Fernandez", "Fanjul", "Santa-Eugenia", "Docampo", "Dominguez"]
 }
 
-# For - Lists
-output "UpperCaseNames" {
-  value = [for value in local.firstNames : upper(value)]
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+locals {  
+  # fullNames   = zipmap(local.firstNames, local.lastNames)
+  # isEveryBody = length(local.lastNames) == 7
+  # alsoAngel   = !local.isEveryBody ? merge(local.fullNames, { "Angel" : "Garcia" }) : local.fullNames
 }
 
-# For - Maps
-output "FullNames" {
-  value = [for key, value in local.fullNames : "${key} ${value}"]
-}
+# output "isEverybodyInList" {
+#   value = local.isEveryBody
+# }
 
-# For - Filtering
-output "NamesEndsWithO" {
-  value = [for key, value in local.fullNames : "${key} ${value}" if(endswith(key, "o"))]
-}
+# output "alsoAngelFullNames" {
+#   value = local.alsoAngel
+# }
 
-# Splat
-output "LastNamesInUpperCase" {
-  value = local.fullNames[*]
-}
+# # For - Lists
+# output "UpperCaseNames" {
+#   value = [for value in local.firstNames : upper(value)]
+# }
 
-provider "azurerm" {
-  features {}
-}
+# # For - Maps
+# output "FullNames" {
+#   value = [for key, value in local.fullNames : "${key} ${value}"]
+# }
 
-# ForEach
-resource "azurerm_resource_group" "rg" {
-  for_each = local.fullNames
-  name     = "${each.key}-tf201"
-  location = "WestEurope"
-}
+# # For - Filtering
+# output "NamesEndsWithO" {
+#   value = [for key, value in local.fullNames : "${key} ${value}" if(endswith(key, "o"))]
+# }
+
+# # Splat
+# output "LastNamesInUpperCase" {
+#   value = local.fullNames[*]
+# }
+
+# provider "azurerm" {
+#   features {}
+# }
+
+# # ForEach
+# resource "azurerm_resource_group" "rg" {
+#   for_each = local.fullNames
+#   name     = "${each.key}-tf201"
+#   location = "WestEurope"
+# }
